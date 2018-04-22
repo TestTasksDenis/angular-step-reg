@@ -1,0 +1,75 @@
+/* Folders
+========================================================================== */
+
+$fonts-folder: "../../fonts";
+$img-folder: "../../img";
+$icons-folder: "../../icons";
+
+/* Site fonts
+========================================================================== */
+
+// Font Marking
+// 100: Thin, Hairline
+// 200: Extra Light, Ultra Light
+// 300: Light
+// 400: Normal
+// 500: Medium
+// 600: Semi Bold
+// 700: Bold
+// 800: Extra Bold, Ultra Bold
+// 900: Black, Heavy
+
+$font1: "Lato";
+
+$fonts:(
+  //Lato-Light: ($font1, "#{$fonts-folder}/#{$font1}/Light/#{$font1}-Light", 300, normal),
+  //Lato-Regular: ($font1, "#{$fonts-folder}/#{$font1}/Regular/#{$font1}-Regular", 400, normal),
+  //Lato-Italic: ($font1, "#{$fonts-folder}/#{$font1}/Italic/#{$font1}-Italic", 400, italic),
+  //Lato-Medium: ($font1, "#{$fonts-folder}/#{$font1}/Medium/#{$font1}-Medium", 500, normal),
+  //Lato-Semibold: ($font1, "#{$fonts-folder}/#{$font1}/Semibold/#{$font1}-Semibold", 600, normal),
+  //Lato-Bold: ($font1, "#{$fonts-folder}/#{$font1}/Bold/#{$font1}-Bold", 700, normal),
+  //Lato-Heavy: ($font1, "#{$fonts-folder}/#{$font1}/Heavy/#{$font1}-Heavy", 900, normal),
+);
+
+$font-family-default : $font1;
+$font-bold-default : $font1;
+$font-italic-default : $font1;
+$font-monospace-default : Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-style-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+$font-size-default : 14px;
+
+/* Layout
+========================================================================== */
+
+// eq. main: .container
+// eq. xl: .container--xl
+$containers: (
+  main: 1170px,
+  xl: 1440px,
+  lg: 1280px,
+  md: 980px,
+  sm: 768px,
+);
+
+$container-response-padding : 15px;
+
+/* Response
+========================================================================== */
+
+$response-breakpoint : 1200px;
+$table-wrap-width               : 1280px;
+
+$resolution-breakpoints: (
+    (xs, 768px, max-width),   // Extra small
+    (sm, 768px, min-width),   // Small
+    (md, 980px, min-width),   // Medium
+    (lg, 1280px, min-width),  // Large
+    (xl, 1440px, min-width)   // Extra Large
+);
+
+/* Default styles
+========================================================================== */
+
+// Body
+$body-bg : #fff;
+$body-color : #000;

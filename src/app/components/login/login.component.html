@@ -1,0 +1,97 @@
+<div class="login">
+  <form class="form" [formGroup]="loginForm">
+  <h3 *ngIf="percentages !== '100%'; else doneLabel">Signup</h3>
+  <ng-template #doneLabel>
+    <label for="pass" class="form__label">Thank you!</label>
+  </ng-template>
+  <div class="login__progress">
+    <div class="login__progress-step" [ngStyle]="{'width': percentages}"></div>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="login__step login__step-1" *ngIf="stepToShow == 1" formGroupName="firstStep">
+    <div class="form__elem">
+      <div class="form__label-error" *ngIf="loginForm.get('firstStep.email').invalid && loginForm.get('firstStep.email').touched; else emailLabel">Invalid Email</div>
+      <ng-template #emailLabel>
+        <label for="email" class="form__label">Email</label>
+      </ng-template>
+      <input type="email" id="email" formControlName="email" class="form__field">
+    </div>
+    <div class="form__elem">
+      <div class="form__label-error" *ngIf="loginForm.get('firstStep.password').invalid && loginForm.get('firstStep.password').touched; else passwordLabel">Invalid Password</div>
+      <ng-template #passwordLabel>
+        <label for="pass" class="form__label">Password</label>
+      </ng-template>
+      <input type="password" id="pass" formControlName="password" class="form__field">
+    </div>
+    <div class="form__elem">
+      <div class="form__label-error" *ngIf="loginForm.get('firstStep.confirmPassword').touched && (loginForm.get('firstStep.password').value !== loginForm.get('firstStep.confirmPassword').value); else passwordConfirmLabel">Passwords doesn't match</div>
+      <ng-template #passwordConfirmLabel>
+        <label for="confirm-pass" class="form__label">Confirm password</label>
+      </ng-template>
+      <input type="password" id="confirm-pass" formControlName="confirmPassword" class="form__field">
+    </div>
+    <div class="form__submit">
+      <button type="submit" class="form__submit-next" (click)="nextStep(loginForm.controls.firstStep, 2)" [disabled]="loginForm.controls.firstStep.invalid || (loginForm.get('firstStep.password').value !== loginForm.get('firstStep.confirmPassword').value)">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="login__step login__step-2" *ngIf="stepToShow == 2" formGroupName="secondStep">
+    <div class="form__elem form__elem--date" formGroupName="date">
+      <div class="form__label-error" *ngIf="loginForm.get('secondStep.date').touched && loginForm.get('secondStep.date').invalid; then is18 else dateTitle">Error Date Format</div>
+      <ng-template #dateTitle>
+        <h4 class="form__label">Date of birth</h4>
+      </ng-template>
+      <div class="form__elem-container">
+        <input type="number" required size="2" maxlength="2" min="1" max="31" id="date-dd" placeholder="dd" formControlName="dd" class="form__field">
+        <input type="number" required size="2" min="1" max="12" id="date-mm" placeholder="mm" formControlName="mm" class="form__field">
+        <input type="number" required min="1900" max="2500" id="date-yy" placeholder="yy" formControlName="yy" class="form__field">
+      </div>
+    </div>
+    <div class="form__elem form__elem--radio">
+      <h4 class="form__label">Gender</h4>
+      <div class="form__elem-container">
+        <label for="gender-male">
+          <input type="radio" id="gender-male" formControlName="gender" value="male">
+          <span>Male</span>
+        </label>
+        <label for="gender-female">
+          <input type="radio" id="gender-female" formControlName="gender" value="female">
+          <span>Female</span>
+        </label>
+        <label for="gender-unspecified">
+          <input type="radio" id="gender-unspecified" formControlName="gender" value="unspecified">
+          <span>Unspecified</span>
+        </label>
+      </div>
+    </div>
+    <div class="form__elem form__elem--select">
+      <label for="date-dd" class="form__label">Date of birth</label>
+      <select formControlName="hear">
+        <option>Internet</option>
+        <option>From friends</option>
+        <option>Rumors</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form__submit">
+      <button class="form__submit-back" (click)="switchStep(1)">Back</button>
+      <button type="submit" class="form__submit-next" (click)="nextStep(loginForm.controls.secondStep, 3)" [disabled]="loginForm.controls.secondStep.invalid">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="login__step login__step-3" *ngIf="stepToShow == 3">
+    <div class="form__elem-container">
+      <div class="icon">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 496.158 496.158" style="enable-background:new 0 0 496.158 496.158;" xml:space="preserve">
+          <path style="fill:#32BEA6;" d="M496.158,248.085c0-137.021-111.07-248.082-248.076-248.082C111.07,0.003,0,111.063,0,248.085c0,137.002,111.07,248.07,248.082,248.07C385.088,496.155,496.158,385.087,496.158,248.085z"></path>
+          <path style="fill:#FFFFFF;" d="M384.673,164.968c-5.84-15.059-17.74-12.682-30.635-10.127c-7.701,1.605-41.953,11.631-96.148,68.777c-22.49,23.717-37.326,42.625-47.094,57.045c-5.967-7.326-12.803-15.164-19.982-22.346c-22.078-22.072-46.699-37.23-47.734-37.867c-10.332-6.316-23.82-3.066-30.154,7.258c-6.326,10.324-3.086,23.834,7.23,30.174c0.211,0.133,21.354,13.205,39.619,31.475c18.627,18.629,35.504,43.822,35.67,44.066c4.109,6.178,11.008,9.783,18.266,9.783c1.246,0,2.504-0.105,3.756-0.322c8.566-1.488,15.447-7.893,17.545-16.332c0.053-0.203,8.756-24.256,54.73-72.727c37.029-39.053,61.723-51.465,70.279-54.908c0.082-0.014,0.141-0.02,0.252-0.043c-0.041,0.01,0.277-0.137,0.793-0.369c1.469-0.551,2.256-0.762,2.301-0.773c-0.422,0.105-0.641,0.131-0.641,0.131l-0.014-0.076c3.959-1.727,11.371-4.916,11.533-4.984C385.405,188.218,389.034,176.214,384.673,164.968z"></path>
+        </svg>
+      </div>
+      <a routerLink="/dashboard">Go to Dashboard</a>
+    </div>
+  </div>
+  </form>
+</div>
