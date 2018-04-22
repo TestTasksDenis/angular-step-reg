@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   steps = 3;
   percentages = '33%';
-  stepToShow = 3;
+  stepToShow = 1;
   loginForm: FormGroup;
   currentUser: object;
   currentYear = new Date().getFullYear();
